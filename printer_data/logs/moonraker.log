@@ -5164,3 +5164,6 @@ System Time: 1694924454.493901, Usage: 0.39%, Memory: 41084 kB
 2023-09-17 13:56:09,243 [websockets.py:open()] - Websocket Opened: ID: 547681423616, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.81, Host Name: 192.168.0.114
 2023-09-17 13:56:09,251 [websockets.py:_handle_identify()] - Websocket 547681423616 Client Identified - Name: mainsail, Version: 2.7.1, Type: web
 2023-09-17 13:57:09,262 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 127.0.0.1
+2023-09-17 14:41:52,910 [websockets.py:write_to_socket()] - Websocket closed while writing: 547682244592
+2023-09-17 14:41:57,452 [websockets.py:on_close()] - Websocket Closed: ID: 547682244592 Close Code: None, Close Reason: None, Pong Time Elapsed: 45.00
+2023-09-17 14:57:09,274 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.0.175
