@@ -1,0 +1,318 @@
+-------------------- Log Start | Sat Sep 16 02:18:28 2023 --------------------
+data_path: /home/pi/printer_data
+is_default_data_path: False
+config_file: /home/pi/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: True
+instance_uuid: c94bd830ae0a4f5e9c343642d1ff36c9
+unix_socket_path: /home/pi/printer_data/comms/moonraker.sock
+software_version: v0.8.0-138-gfe12095
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/pi/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+max_upload_size = 1024
+klippy_uds_address = ~/printer_data/comms/klippy.sock
+
+[file_manager]
+enable_object_processing = False
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+
+[octoprint_compat]
+
+[history]
+
+[announcements]
+subscriptions = 
+	mainsail
+
+[update_manager]
+refresh_interval = 168
+enable_auto_refresh = True
+
+[update_manager mainsail]
+type = web
+channel = stable
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager mainsail-config]
+type = git_repo
+primary_branch = master
+path = ~/mainsail-config
+origin = https://github.com/mainsail-crew/mainsail-config.git
+managed_services = klipper
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+managed_services = crowsnest
+install_script = tools/pkglist.sh
+
+[update_manager sonar]
+type = git_repo
+path = ~/sonar
+origin = https://github.com/mainsail-crew/sonar.git
+primary_branch = main
+managed_services = sonar
+install_script = tools/install.sh
+
+#################################################################
+All Configuration Files:
+/home/pi/printer_data/config/moonraker.conf
+#################################################################
+Unsafe Shutdown Count: 14
+
+System Info:
+
+***python***
+  version: sys.version_info(major=3, minor=9, micro=2, releaselevel='final', serial=0)
+  version_string: 3.9.2 (default, Feb 28 2021, 17:03:44)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: 100000001d6673b9
+  hardware_desc: BCM2835
+  model: Raspberry Pi 4 Model B Rev 1.4
+  total_memory: 7819944
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SL32G
+  product_revision: 8.0
+  serial_number: 14e92557
+  manufacturer_date: 2/2016
+  capacity: 29.7 GiB
+  total_bytes: 31914983424
+
+***distribution***
+  name: Debian GNU/Linux 11 (bullseye)
+  id: debian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: 
+  codename: bullseye
+  release_info: {'name': 'MainsailOS', 'version_id': '1.2.1', 'codename': 'bullseye', 'id': 'mainsailos'}
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', 'system.slice', 'network-online.target']
+**After=['klipper.service', 'network-online.target', 'systemd-journald.socket', 'basic.target', 'sysinit.target', 'system.slice']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/pi/printer_data/systemd/moonraker.env
+**ExecStart=/home/pi/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=pi
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['system.slice', '-.mount', 'sysinit.target']
+**After=['system.slice', 'basic.target', '-.mount', 'klipper-mcu.service', 'systemd-journald.socket', 'sysinit.target', 'network-online.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/pi/printer_data/systemd/klipper.env
+**ExecStart=/home/pi/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/pi/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=pi
+Git Repo moonraker: Warnings detected:
+  Repo has untracked source files: ['moonraker/components/timelapse.py']
+Git Repo klipper: No warnings detected
+Git Repo mainsail-config: No warnings detected
+Git Repo crowsnest: No warnings detected
+Git Repo sonar: No warnings detected
+Klipper Version: v0.11.0-271-g5f990f93
+2023-09-16 11:18:28,128 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.0.175
+2023-09-16 11:18:28,134 [app.py:log_request()] - 101 GET /websocket (192.168.0.175) [_TRUSTED_USER_] 10.64ms
+2023-09-16 11:18:28,135 [websockets.py:open()] - Websocket Opened: ID: 548034059472, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.81, Host Name: 192.168.0.114
+2023-09-16 11:18:28,140 [websockets.py:_handle_identify()] - Websocket 548034059472 Client Identified - Name: mainsail, Version: 2.7.1, Type: web
+2023-09-16 11:18:31,242 [app.py:prepare()] - Upload Request Received from 192.168.0.175
+2023-09-16 11:18:31,247 [app.py:post()] - Processing Uploaded File: printer.cfg
+2023-09-16 11:18:31,252 [app.py:log_request()] - 201 POST /server/files/upload (192.168.0.175) [_TRUSTED_USER_] 12.29ms
+2023-09-16 11:18:32,315 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2023-09-16 11:18:33,575 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2023-09-16 11:18:37,607 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2023-09-16 11:18:37,609 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2023-09-16 11:18:37,857 [job_state.py:_handle_started()] - Job state initialized: standby
+2023-09-16 11:18:38,115 [klippy_connection.py:_check_ready()] - Klippy ready
+2023-09-16 11:18:38,620 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'extruder']
+2023-09-16 11:21:15,972 [app.py:prepare()] - Upload Request Received from 192.168.0.175
+2023-09-16 11:21:16,507 [app.py:post()] - Processing Uploaded File: CFFFP_TEST2.gcode
+2023-09-16 11:21:16,827 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is disabled
+
+2023-09-16 11:21:16,901 [shell_command.py:_check_proc_success()] - Command (/home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/components/file_manager/metadata.py -p /home/pi/printer_data/gcodes -f "CFFFP_TEST2.gcode") successfully finished
+2023-09-16 11:21:16,906 [app.py:log_request()] - 201 POST /server/files/upload (192.168.0.175) [_TRUSTED_USER_] 936.58ms
+2023-09-16 11:21:20,588 [job_state.py:_status_update()] - Job Started: CFFFP_TEST2.gcode
+2023-09-16 12:24:55,478 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.0.175
+2023-09-16 15:07:01,578 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.0.175
+2023-09-16 15:07:37,457 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2023-09-16 15:07:37,470 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1694844427.754035, Usage: 1.94%, Memory: 38164 kB
+System Time: 1694844428.754980, Usage: 2.21%, Memory: 38164 kB
+System Time: 1694844429.756639, Usage: 1.84%, Memory: 38164 kB
+System Time: 1694844430.757095, Usage: 1.83%, Memory: 38164 kB
+System Time: 1694844431.758151, Usage: 1.83%, Memory: 38164 kB
+System Time: 1694844432.760455, Usage: 5.32%, Memory: 38164 kB
+System Time: 1694844433.760817, Usage: 1.89%, Memory: 38164 kB
+System Time: 1694844434.760770, Usage: 1.64%, Memory: 38164 kB
+System Time: 1694844435.762211, Usage: 0.97%, Memory: 38164 kB
+System Time: 1694844436.762743, Usage: 0.9%, Memory: 38164 kB
+System Time: 1694844437.763937, Usage: 0.92%, Memory: 38164 kB
+System Time: 1694844438.764587, Usage: 1.05%, Memory: 38164 kB
+System Time: 1694844439.768070, Usage: 1.05%, Memory: 38164 kB
+System Time: 1694844440.769428, Usage: 1.78%, Memory: 38164 kB
+System Time: 1694844441.770130, Usage: 1.89%, Memory: 38164 kB
+System Time: 1694844442.771802, Usage: 5.35%, Memory: 38164 kB
+System Time: 1694844443.772080, Usage: 1.91%, Memory: 38164 kB
+System Time: 1694844444.772473, Usage: 1.84%, Memory: 38164 kB
+System Time: 1694844445.773514, Usage: 1.77%, Memory: 38164 kB
+System Time: 1694844446.775397, Usage: 1.83%, Memory: 38164 kB
+System Time: 1694844447.775834, Usage: 1.8%, Memory: 38164 kB
+System Time: 1694844448.777119, Usage: 2.16%, Memory: 38164 kB
+System Time: 1694844449.779214, Usage: 1.82%, Memory: 38164 kB
+System Time: 1694844450.779853, Usage: 1.94%, Memory: 38164 kB
+System Time: 1694844451.781267, Usage: 1.8%, Memory: 38164 kB
+System Time: 1694844452.783542, Usage: 5.3%, Memory: 38164 kB
+System Time: 1694844453.782641, Usage: 2.02%, Memory: 38164 kB
+System Time: 1694844454.785040, Usage: 1.83%, Memory: 38164 kB
+System Time: 1694844455.787627, Usage: 1.91%, Memory: 38164 kB
+System Time: 1694844456.787446, Usage: 1.96%, Memory: 38164 kB
+CPU Temperature: 50.634
+2023-09-16 15:07:37,495 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2023-09-16 15:07:44,539 [app.py:prepare()] - Upload Request Received from 192.168.0.175
+2023-09-16 15:07:44,545 [app.py:post()] - Processing Uploaded File: printer.cfg
+2023-09-16 15:07:44,556 [app.py:log_request()] - 201 POST /server/files/upload (192.168.0.175) [_TRUSTED_USER_] 19.31ms
+2023-09-16 15:07:44,619 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2023-09-16 15:07:45,880 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2023-09-16 15:07:50,200 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2023-09-16 15:07:50,202 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2023-09-16 15:07:50,451 [job_state.py:_handle_started()] - Job state initialized: standby
+2023-09-16 15:07:50,712 [klippy_connection.py:_check_ready()] - Klippy ready
+2023-09-16 15:07:51,210 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'extruder']
+2023-09-16 15:10:15,677 [app.py:prepare()] - Upload Request Received from 192.168.0.175
+2023-09-16 15:10:15,683 [app.py:post()] - Processing Uploaded File: printer.cfg
+2023-09-16 15:10:15,696 [app.py:log_request()] - 201 POST /server/files/upload (192.168.0.175) [_TRUSTED_USER_] 22.85ms
+2023-09-16 15:10:16,769 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2023-09-16 15:10:18,030 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2023-09-16 15:10:22,350 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2023-09-16 15:10:22,353 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2023-09-16 15:10:22,602 [job_state.py:_handle_started()] - Job state initialized: standby
+2023-09-16 15:10:22,871 [klippy_connection.py:_check_ready()] - Klippy ready
+2023-09-16 15:10:23,363 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'extruder']
+2023-09-16 15:10:34,891 [job_state.py:_status_update()] - Job Started: CFFFP_TEST2.gcode
+2023-09-16 15:12:05,848 [app.py:prepare()] - Upload Request Received from 192.168.0.175
+2023-09-16 15:12:05,854 [app.py:post()] - Processing Uploaded File: printer.cfg
+2023-09-16 15:12:05,869 [app.py:log_request()] - 201 POST /server/files/upload (192.168.0.175) [_TRUSTED_USER_] 24.43ms
+2023-09-16 16:14:08,176 [websockets.py:write_to_socket()] - Websocket closed while writing: 548034059472
+2023-09-16 16:14:13,139 [websockets.py:on_close()] - Websocket Closed: ID: 548034059472 Close Code: None, Close Reason: None, Pong Time Elapsed: 45.00
+2023-09-16 16:14:55,539 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.0.175
+2023-09-16 16:20:16,850 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.0.175
+2023-09-16 16:20:16,854 [app.py:log_request()] - 101 GET /websocket (192.168.0.175) [_TRUSTED_USER_] 7.57ms
+2023-09-16 16:20:16,854 [websockets.py:open()] - Websocket Opened: ID: 548033976304, Proxied: True, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.81, Host Name: 192.168.0.114
+2023-09-16 16:20:16,862 [websockets.py:_handle_identify()] - Websocket 548033976304 Client Identified - Name: mainsail, Version: 2.7.1, Type: web
+2023-09-16 16:20:23,823 [app.py:prepare()] - Upload Request Received from 192.168.0.175
+2023-09-16 16:20:24,814 [app.py:post()] - Processing Uploaded File: CFFFP_120mmblower.gcode
+2023-09-16 16:20:25,007 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is disabled
+
+2023-09-16 16:20:25,070 [shell_command.py:_check_proc_success()] - Command (/home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/components/file_manager/metadata.py -p /home/pi/printer_data/gcodes -f "CFFFP_120mmblower.gcode") successfully finished
+2023-09-16 16:20:25,074 [app.py:log_request()] - 201 POST /server/files/upload (192.168.0.175) [_TRUSTED_USER_] 1253.75ms
+2023-09-16 16:20:44,929 [job_state.py:_status_update()] - Job Started: CFFFP_120mmblower.gcode
+2023-09-16 18:14:55,563 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.0.175
+2023-09-16 18:22:14,808 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2023-09-16 18:22:14,815 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1694856105.621302, Usage: 9.7%, Memory: 39420 kB
+System Time: 1694856106.619492, Usage: 6.47%, Memory: 39420 kB
+System Time: 1694856107.623920, Usage: 4.76%, Memory: 39420 kB
+System Time: 1694856108.622617, Usage: 6.51%, Memory: 39420 kB
+System Time: 1694856109.625309, Usage: 5.08%, Memory: 39420 kB
+System Time: 1694856110.625967, Usage: 5.91%, Memory: 39420 kB
+System Time: 1694856111.625865, Usage: 5.86%, Memory: 39420 kB
+System Time: 1694856112.627419, Usage: 4.49%, Memory: 39420 kB
+System Time: 1694856113.628290, Usage: 4.42%, Memory: 39420 kB
+System Time: 1694856114.628836, Usage: 1.88%, Memory: 39420 kB
+System Time: 1694856115.630956, Usage: 5.41%, Memory: 39420 kB
+System Time: 1694856116.630868, Usage: 1.87%, Memory: 39420 kB
+System Time: 1694856117.631081, Usage: 2.69%, Memory: 39420 kB
+System Time: 1694856118.631571, Usage: 2.14%, Memory: 39420 kB
+System Time: 1694856119.633014, Usage: 1.72%, Memory: 39420 kB
+System Time: 1694856120.633975, Usage: 2.2%, Memory: 39420 kB
+System Time: 1694856121.635197, Usage: 1.85%, Memory: 39420 kB
+System Time: 1694856122.638174, Usage: 1.65%, Memory: 39420 kB
+System Time: 1694856123.638973, Usage: 2.35%, Memory: 39420 kB
+System Time: 1694856124.639461, Usage: 1.77%, Memory: 39420 kB
+System Time: 1694856125.643268, Usage: 5.14%, Memory: 39420 kB
+System Time: 1694856126.644222, Usage: 4.29%, Memory: 39420 kB
+System Time: 1694856127.644058, Usage: 8.86%, Memory: 39420 kB
+System Time: 1694856128.647058, Usage: 8.56%, Memory: 39420 kB
+System Time: 1694856129.648055, Usage: 11.17%, Memory: 39420 kB
+System Time: 1694856130.645354, Usage: 12.05%, Memory: 39420 kB
+System Time: 1694856131.646565, Usage: 5.31%, Memory: 39420 kB
+System Time: 1694856132.647147, Usage: 6.19%, Memory: 39420 kB
+System Time: 1694856133.647924, Usage: 5.33%, Memory: 39420 kB
+System Time: 1694856134.650186, Usage: 5.35%, Memory: 39420 kB
+CPU Temperature: 55.504
+2023-09-16 18:22:14,826 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
